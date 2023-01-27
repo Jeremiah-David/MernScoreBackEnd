@@ -1,18 +1,18 @@
 const express = require("express");
 const connectDB = require("./config/db");
 const cors = require("cors");
-const cp = require("cookie-parser");
 const jwt = require("jsonwebtoken");
+const cp = require("cookie-parser");
 require("dotenv").config();
 
 const app = express();
 
 app.use(cp());
 
-app.get("./set/cookie", (req, res) => {
+app.get("/set/cookie", (req, res) => {
   const payload = {
     name: "Jeremiah David",
-    age: 40,
+    age: "40",
     test: "test",
   };
 
@@ -28,7 +28,8 @@ app.get("./set/cookie", (req, res) => {
 app.get("/get/cookie", (req, res) => {
   const token = req.cookies.token;
   const payload = jwt.verify(token, "testkey");
-  res.json(token, payload);
+  res.json(payload);
+  // res.json();
 });
 
 app.get("/", (req, res) => res.send("Hello world"));
