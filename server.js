@@ -6,8 +6,13 @@ const cp = require("cookie-parser");
 require("dotenv").config();
 
 const app = express();
-
 app.use(cp());
+
+app.use(cors({ origin: true, credentials: true }));
+app.use(express.json({ extended: false }));
+
+const books = require("./routes/api/books");
+app.use("/api/books", books);
 
 app.get("/set/cookie", (req, res) => {
   const payload = {
