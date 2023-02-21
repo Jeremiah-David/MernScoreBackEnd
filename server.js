@@ -21,6 +21,9 @@ app.get("/set/cookie", (req, res) => {
     test: "test",
   };
 
+  const io = new WebSocket.Server({ noServer: true });
+  global.io = new WebSocket.Server({ noServer: true });
+
   const token = jwt.sign(payload, "testkey");
 
   res
